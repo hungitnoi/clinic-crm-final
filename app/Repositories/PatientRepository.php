@@ -19,8 +19,10 @@ class PatientRepository
         $sql = "SELECT COUNT(*) AS total FROM patients";
         $params = [];
         if ($keyword !== '') {
-            $sql .= " WHERE full_name LIKE :keyword OR email LIKE :keyword OR phone LIKE :keyword";
-            $params['keyword'] = '%' . $keyword . '%';
+            $sql .= " WHERE full_name LIKE :kw1 OR email LIKE :kw2 OR phone LIKE :kw3";
+            $params['kw1'] = '%' . $keyword . '%';
+            $params['kw2'] = '%' . $keyword . '%';
+            $params['kw3'] = '%' . $keyword . '%';
         }
         $stmt = $this->db->prepare($sql);
         $stmt->execute($params);
@@ -33,8 +35,10 @@ class PatientRepository
         $sql = "SELECT * FROM patients";
         $params = [];
         if ($keyword !== '') {
-            $sql .= " WHERE full_name LIKE :keyword OR email LIKE :keyword OR phone LIKE :keyword";
-            $params['keyword'] = '%' . $keyword . '%';
+            $sql .= " WHERE full_name LIKE :kw1 OR email LIKE :kw2 OR phone LIKE :kw3";
+            $params['kw1'] = '%' . $keyword . '%';
+            $params['kw2'] = '%' . $keyword . '%';
+            $params['kw3'] = '%' . $keyword . '%';
         }
         
         $sql .= " ORDER BY {$sortCol} {$sortDir} LIMIT :limit OFFSET :offset";

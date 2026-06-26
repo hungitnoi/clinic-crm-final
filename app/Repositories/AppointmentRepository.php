@@ -18,9 +18,11 @@ class AppointmentRepository
         $sql = "SELECT COUNT(*) AS total FROM appointments";
         $params = [];
         if ($keyword !== '') {
-            $sql .= " WHERE appointment_code LIKE :keyword OR patient_name LIKE :keyword OR patient_phone LIKE :keyword";
-            $params['keyword'] = '%' . $keyword . '%';
-        }
+            $sql .= " WHERE appointment_code LIKE :kw1 OR patient_name LIKE :kw2 OR patient_phone LIKE :kw3";
+            $params['kw1'] = '%' . $keyword . '%';
+            $params['kw2'] = '%' . $keyword . '%';
+            $params['kw3'] = '%' . $keyword . '%';
+        }   
         $stmt = $this->db->prepare($sql);
         $stmt->execute($params);
         return (int) ($stmt->fetch()['total'] ?? 0);
@@ -31,8 +33,10 @@ class AppointmentRepository
         $sql = "SELECT * FROM appointments";
         $params = [];
         if ($keyword !== '') {
-            $sql .= " WHERE appointment_code LIKE :keyword OR patient_name LIKE :keyword OR patient_phone LIKE :keyword";
-            $params['keyword'] = '%' . $keyword . '%';
+            $sql .= " WHERE appointment_code LIKE :kw1 OR patient_name LIKE :kw2 OR patient_phone LIKE :kw3";
+            $params['kw1'] = '%' . $keyword . '%';
+            $params['kw2'] = '%' . $keyword . '%';
+            $params['kw3'] = '%' . $keyword . '%';
         }
         $sql .= " ORDER BY {$sortCol} {$sortDir} LIMIT :limit OFFSET :offset";
         $stmt = $this->db->prepare($sql);
